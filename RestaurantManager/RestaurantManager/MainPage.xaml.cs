@@ -30,12 +30,12 @@ namespace RestaurantManager
 
         private void btnToOrders_OnClick(object sender, RoutedEventArgs e)
         {
-          Utilities.Navigate(typeof(OrderPage));
+          Utilities.Navigate(typeof(ExpeditePage));
         }
 
         private void btnSubmitOrder_OnClick(object sender, RoutedEventArgs e)
         {
-            Utilities.Navigate(typeof(ExpeditePage));
+            Utilities.Navigate(typeof(OrderPage));
         }
 
 
