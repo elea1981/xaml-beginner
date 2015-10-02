@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using RestaurantManager.HelperCode;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,5 +27,18 @@ namespace RestaurantManager
         {
             this.InitializeComponent();
         }
+
+        private void btnToOrders_OnClick(object sender, RoutedEventArgs e)
+        {
+          Utilities.Navigate(typeof(OrderPage));
+        }
+
+        private void btnSubmitOrder_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utilities.Navigate(typeof(ExpeditePage));
+        }
+
+
+        
     }
 }

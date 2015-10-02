@@ -14,18 +14,20 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RestaurantManager.HelperCode;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace RestaurantManager
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class OrderPage:Page
+    public sealed partial class UCtrlNavigation : UserControl
     {
-        public OrderPage()
+        public UCtrlNavigation()
         {
             this.InitializeComponent();
+        }
+
+        private void btnHome_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utilities.Navigate(typeof(MainPage));
         }
     }
 }

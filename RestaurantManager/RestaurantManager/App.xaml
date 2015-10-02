@@ -8,13 +8,15 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="32"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Background" Value="DimGray"></Setter>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="32" ></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
         </Style>
+        <!-- defining this default style for the grids is causing problems
         <Style TargetType="Grid">
             <Setter Property="Background" Value="Black"></Setter>
-        </Style>
+        </Style>-->
     </Application.Resources>
 </Application>

@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid>
+    <Page.TopAppBar>
+      <AppBar><local:UCtrlNavigation /></AppBar>  
+    </Page.TopAppBar>
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -15,6 +17,7 @@
             <RowDefinition Height="9*" ></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
+        <GridView Grid.Row="0"></GridView>
         <TextBlock Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Text="**Clear All Orders**"></TextBlock>
     </Grid>
 </Page>
