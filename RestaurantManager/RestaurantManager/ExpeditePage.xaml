@@ -3,21 +3,43 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:RestaurantManager"
+    xmlns:models="using:RestaurantManager.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <Binding Source="{StaticResource DataViewModel}" Path="Data.Orders" FallbackValue="{StaticResource FallbackValue}" TargetNullValue="{StaticResource TargetNullValue}">
+        </Binding>
+    </Page.DataContext>
     <Page.TopAppBar>
-      <AppBar><local:UCtrlNavigation /></AppBar>  
+        <AppBar>
+            <local:UCtrlNavigation />
+        </AppBar>
     </Page.TopAppBar>
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*" ></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GridView Grid.Row="0"></GridView>
-        <TextBlock Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Text="**Clear All Orders**"></TextBlock>
+        <GridView x:Name="gvOrders" Grid.Row="0" ItemsSource="{Binding}">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <ListView ItemsSource="{Binding SelectedMenuItems}" IsItemClickEnabled="False">
+                            <ListViewItem Style="{StaticResource stlListViewDgv}"></ListViewItem>
+                        </ListView>
+                        <TextBlock Text="{StaticResource Requests}" Style="{StaticResource stlCapDgv}"></TextBlock>
+                        <TextBlock Text="{Binding Requests}" Style="{StaticResource stlTextBlockDgv}"></TextBlock>
+                        <Button Content="{StaticResource ClearOne}" Style="{StaticResource stlButtonDgv}" 
+                                Click="ButtonBase_OnClick" Tag="{Binding}"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <Button x:Name="btnClear" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Content="Clear All Orders" Style="{StaticResource stlHoverBtn}" Click="btnClear_Click" ></Button>
     </Grid>
 </Page>
