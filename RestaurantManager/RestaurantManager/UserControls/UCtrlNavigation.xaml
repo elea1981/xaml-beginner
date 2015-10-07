@@ -7,9 +7,18 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
+    <UserControl.Resources>
+        <x:String x:Key="btnHome">Home</x:String>
+        <x:String x:Key="btnExpedite">Expedite page</x:String>
+        <x:String x:Key="btnOrder">Order page</x:String>
+        <Style TargetType="AppBarButton">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal" >
-        <AppBarButton x:Name="btnHome" Click="btnHome_OnClick" Icon="Home" Label="Home"/>
+        <AppBarButton x:Name="btnHome" Click="btnHome_OnClick" Icon="Home" Label="{StaticResource btnHome}"/>
+        <AppBarButton x:Name="btnExpeditePage" Click="btnExpeditePage_OnClick"  Label="{StaticResource btnExpedite}"></AppBarButton>
+        <AppBarButton x:Name="btnOrderPage" Click="btnOrderPage_OnClick"  Label="{StaticResource btnOrder}"></AppBarButton>
     </StackPanel>
 
 </UserControl>

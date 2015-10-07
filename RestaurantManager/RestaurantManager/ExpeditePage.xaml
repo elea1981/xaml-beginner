@@ -16,10 +16,7 @@
             <local:UCtrlNavigation />
         </AppBar>
     </Page.TopAppBar>
-    <Grid Background="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -27,19 +24,45 @@
         <GridView x:Name="gvOrders" Grid.Row="0" ItemsSource="{Binding}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <ListView ItemsSource="{Binding SelectedMenuItems}" IsItemClickEnabled="False">
-                            <ListViewItem Style="{StaticResource stlListViewDgv}"></ListViewItem>
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="175"></RowDefinition>
+                            <RowDefinition Height="125"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0">
+                            <Run Text="{StaticResource Table}"></Run>
+                            <Run Text=" "></Run>
+                            <Run Text="{Binding Table}"></Run>
+                        </TextBlock>
+                        <ListView Grid.Row="1"
+                            ItemsSource="{Binding SelectedMenuItems}" IsItemClickEnabled="False"  Style="{StaticResource  stlDefListView}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ListViewItem Style="{StaticResource stlGridListViewItem}"  Tag="{Binding}">
+                                        <TextBlock>
+                                            <Run Text="{Binding Number}"></Run>
+                                            <Run Text=" - "></Run>
+                                            <Run Text="{Binding Name}"></Run>
+                                        </TextBlock>
+                                    </ListViewItem>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
-                        <TextBlock Text="{StaticResource Requests}" Style="{StaticResource stlCapDgv}"></TextBlock>
-                        <TextBlock Text="{Binding Requests}" Style="{StaticResource stlTextBlockDgv}"></TextBlock>
-                        <Button Content="{StaticResource ClearOne}" Style="{StaticResource stlButtonDgv}" 
-                                Click="ButtonBase_OnClick" Tag="{Binding}"></Button>
-                    </StackPanel>
+                        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <TextBlock  
+                                   Text="{Binding Requests}" Style="{StaticResource stlTextBlockDgv}"></TextBlock>
+                        </ScrollViewer>
+                        <Button Grid.Row="3"
+                            Content="{StaticResource ClearOne}" Style="{StaticResource stlButtonDgv}" 
+                                Click="buttonBase_OnClick" Tag="{Binding}">
+                        </Button>
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
         <Button x:Name="btnClear" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Content="Clear All Orders" Style="{StaticResource stlHoverBtn}" Click="btnClear_Click" ></Button>
+                Content="Clear All Orders" Style="{StaticResource stlDefButton}" Click="btnClear_Click" ></Button>
     </Grid>
 </Page>

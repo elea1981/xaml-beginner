@@ -7,7 +7,7 @@
     xmlns:models="using:RestaurantManager.Models"
     mc:Ignorable="d">
    
-    <Grid Background="Black">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
             <ColumnDefinition Width="5*"></ColumnDefinition>
@@ -17,20 +17,14 @@
             <RowDefinition Height="1*" ></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" 
-                   VerticalAlignment="Bottom" Text="Restaurant Manager"></TextBlock>
-        <TextBlock Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" 
-                   VerticalAlignment="Bottom" Text="Internal Test version">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="20" ></Setter>
-                    <Setter Property="Foreground" Value="White"></Setter>
-                </Style>
-            </TextBlock.Style>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                   VerticalAlignment="Bottom" Text="{StaticResource ResManager}" Style="{StaticResource stlTextBlockBig}"></TextBlock>
+        <TextBlock Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2"  
+                   VerticalAlignment="Bottom" Text="{StaticResource IntVersion}"  Style="{StaticResource stlTextBlockMedium}">
         </TextBlock>
         <Button x:Name="btnToOrdersList" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" 
-                Content="Go to Orders View" Click="btnToOrders_OnClick" Style="{StaticResource stlHoverBtn}"></Button>
+                Content="{StaticResource GoOrders}" Click="btnToOrders_OnClick" Style="{StaticResource stlDefButton}"></Button>
         <Button x:Name="btnSubmit" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Content="Submit Order" Click="btnSubmitOrder_OnClick"  Style="{StaticResource stlHoverBtn}"></Button>
+                Content="{StaticResource GoSubmit}" Click="btnSubmitOrder_OnClick"  Style="{StaticResource stlDefButton}"></Button>
     </Grid>
 </Page>

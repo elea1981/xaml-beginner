@@ -16,7 +16,8 @@ namespace RestaurantManager.Models
         //public ObservableCollection<string> SelectedMenuItems { get; set; }
         public ObservableCollection<Order> Orders { get; set; }
         public List<string> MenuItems { get; set; }
-        public ObservableCollection<string> CurrentlySelectedMenuItems { get; set; }
+        //public ObservableCollection<string> CurrentlySelectedMenuItems { get; set; }
+        public ObservableCollection<OrderItem> CurrentlySelectedMenuItems { get; set; }
 
         #endregion
 
@@ -35,10 +36,36 @@ namespace RestaurantManager.Models
 
             this.Orders = new ObservableCollection<Order>
             {
-                   new Order {SelectedMenuItems =new List<string> { "Steak", "Chicken","Peas"}, Requests = "req"},
-                   new Order {SelectedMenuItems = new List<string>{ "Rice", "Chicken"}, Requests =""},
-                   new Order {SelectedMenuItems = new List<string>{ "Hummus", "Pita"}, Requests = ""}
-                };
+                //new Order {SelectedMenuItems =new List<string> { "Steak", "Chicken","Peas"}, Requests = "steak well done, crusty chicken fresh wine"},
+                //new Order {SelectedMenuItems = new List<string>{ "Rice", "Chicken"}, Requests ="nothing special"},
+                //new Order {SelectedMenuItems = new List<string>{ "Hummus", "Pita"}, Requests = "champagne"}
+                new Order {
+                        SelectedMenuItems = new List<OrderItem>
+                        {
+                            new OrderItem { Name = "Steak"},
+                            new OrderItem { Name = "Chicken"},
+                            new OrderItem { Name ="Peas"}
+                        },
+                    Requests = "steak well done, crusty chicken fresh wine",
+                    Table = "9"},
+                new Order {
+                    SelectedMenuItems = new List<OrderItem>
+                        {
+                            new OrderItem {Name="Rice"},
+                            new OrderItem { Name = "Chicken"}
+                        },
+                    Requests ="nothing special",
+                    Table="1"},
+                new Order {
+                    SelectedMenuItems = new List<OrderItem>
+                        {
+                            new OrderItem { Name = "Hummus"},
+                            new OrderItem { Name = "Pita"}
+
+                        },
+                    Requests = "champagne",
+                    Table="4"}
+            };
 
             this.MenuItems = new List<string>
            {
@@ -50,32 +77,19 @@ namespace RestaurantManager.Models
                "Pita"
            };
 
-            this.CurrentlySelectedMenuItems = new ObservableCollection<string>
+            // this.CurrentlySelectedMenuItems = new ObservableCollection<string>
+            //{
+            //    "Rice",
+            //    "Pita"
+            //};
+            this.CurrentlySelectedMenuItems = new ObservableCollection<OrderItem>
            {
-               "Rice",
-               "Pita"
+               new OrderItem { Name="Rice"},
+               new OrderItem { Name="Pita"}
            };
 
         }
 
         #endregion
-    }
-
-    public class Order
-    {
-        public List<string> SelectedMenuItems { get; set; }
-        public string Requests { get; set; }
-    }
-
-
-    public class DataViewModel
-    {
-        public DataManager Data { get; set; }
-
-        public DataViewModel()
-        {
-            this.Data = new DataManager();
-
-        }
     }
 }

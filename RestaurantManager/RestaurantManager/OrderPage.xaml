@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page xmlns:UserControls="using:RestaurantManager.UserControls" 
     x:Class="RestaurantManager.OrderPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-   
+
     <Page.DataContext>
         <Binding Source="{StaticResource DataViewModel}" FallbackValue="Wrong Property" TargetNullValue="Null value">
         </Binding>
@@ -16,7 +16,7 @@
             <local:UCtrlNavigation />
         </AppBar>
     </Page.TopAppBar>
-    <Grid Background="Black">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
             <ColumnDefinition Width="0.25*"></ColumnDefinition>
@@ -29,19 +29,72 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <TextBlock Grid.Column="1" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Text="Special Requests:"></TextBlock>
-        <TextBlock Grid.Column="2" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Text="Order Items:"></TextBlock>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Left" 
+                       Style="{StaticResource stlTextBlockMedium}"  Text="{StaticResource Tables}"></TextBlock>
+            <ToggleButton Grid.Column="0" Grid.Row="1" Content="1" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="1" Grid.Row="1" Content="2" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="2" Grid.Row="1" Content="3" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="3" Grid.Row="1" Content="4" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="4" Grid.Row="1" Content="5" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="5" Grid.Row="1" Content="6" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="6" Grid.Row="1" Content="7" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="7" Grid.Row="1" Content="8" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="8" Grid.Row="1" Content="9" Checked="ToggleButton_OnChecked"></ToggleButton>
+            <ToggleButton Grid.Column="9" Grid.Row="1" Content="10" Checked="ToggleButton_OnChecked"></ToggleButton>
+        </Grid>
+        <TextBlock Grid.Column="1" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center"   Style="{StaticResource stlTextBlockMedium}">
+            <Run Text="{StaticResource SpReq}"></Run>
+            <Run Text=":"></Run>
+        </TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Style="{StaticResource stlTextBlockMedium}">
+            <Run Text="{StaticResource OrItems}"></Run>
+            <Run Text=":"></Run>
+        </TextBlock>
         <Button x:Name="btnAdd" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" 
-                VerticalAlignment="Center" Content="Add to Order" Click="BtnAdd_OnClick" Style="{StaticResource stlHoverBtn}"></Button>
+                VerticalAlignment="Center" Content="{StaticResource AddToOrder}" Click="btnAdd_OnClick" Style="{StaticResource stlDefButton}"></Button>
         <Button x:Name="btnSubmit" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
-                VerticalAlignment="Center" Content="Submit Order" Click="btnSubmit_OnClick" Style="{StaticResource stlHoverBtn}"
+                VerticalAlignment="Center" Content="{StaticResource SubOrder}" Click="btnSubmit_OnClick" Style="{StaticResource stlDefButton}"
                 ></Button>
         <ListView x:Name="lvAvailable" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" 
-                  ItemsSource="{Binding Data.MenuItems}" SelectionMode="Multiple" Foreground="White">
+                  ItemsSource="{Binding Data.MenuItems}" SelectionMode="Multiple" Style="{StaticResource  stlDefListView}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ListViewItem Style="{StaticResource stlDefListViewItem}" Content="{Binding}">
+                    </ListViewItem>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="lvSelected" Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Data.CurrentlySelectedMenuItems}"  Foreground="White">
+        <ListView x:Name="lvSelected" Grid.Column="2" Grid.Row="2"
+                  ItemsSource="{Binding Data.CurrentlySelectedMenuItems}" Style="{StaticResource stlDefListView}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ListViewItem Style="{StaticResource stlDefListViewItem}" Tag="{Binding}">
+                        <TextBlock>
+                            <Run Text="{Binding Number}"></Run>
+                            <Run Text=" - "></Run>
+                            <Run Text="{Binding Name}"></Run>
+                        </TextBlock>
+                    </ListViewItem>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <TextBox x:Name="txtRequests" Grid.Column="1" Grid.Row="2"  />
+        <TextBox x:Name="txtRequests" Grid.Column="1" Grid.Row="2" Style="{StaticResource stlTextBoxMulti}" />
     </Grid>
 </Page>

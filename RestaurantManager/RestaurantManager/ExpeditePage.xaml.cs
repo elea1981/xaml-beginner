@@ -36,7 +36,7 @@ namespace RestaurantManager
             this.dataModel.Data.Orders.Clear();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void buttonBase_OnClick(object sender, RoutedEventArgs e)
         {
             this.dataModel.Data.Orders.Remove((Order) ((Button) sender).Tag);
         }

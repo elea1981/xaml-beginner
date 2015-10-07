@@ -29,5 +29,15 @@ namespace RestaurantManager
         {
             Utilities.Navigate(typeof(MainPage));
         }
+
+        private void btnExpeditePage_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utilities.Navigate(typeof(ExpeditePage));
+        }
+
+        private void btnOrderPage_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utilities.Navigate(typeof(OrderPage));
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -33,23 +34,60 @@ namespace RestaurantManager
 
         private void btnSubmit_OnClick(object sender, RoutedEventArgs e)
         {
-            this.dataModel.Data.Orders.Add(
-                new Order()
+            if (this.lvSelected.Items.Any())
+            {
+                if (Utilities.FindVisualChildren<ToggleButton>(this).Any(t => t.IsChecked.HasValue && t.IsChecked.Value))
                 {
-                    SelectedMenuItems = this.lvSelected.Items.Cast<string>().ToList(),
-                    Requests = this.txtRequests.Text
-                });
-            this.dataModel.Data.CurrentlySelectedMenuItems.Clear();
-            this.txtRequests.Text = string.Empty;
+                    ToggleButton btnSelected =
+                        Utilities.FindVisualChildren<ToggleButton>(this)
+                            .First(t => t.IsChecked.HasValue && t.IsChecked.Value);
+                    this.dataModel.Data.Orders.Add(
+                        new Order
+                        {
+                            SelectedMenuItems = this.lvSelected.Items.Cast<OrderItem>().ToList(),
+                            Requests = this.txtRequests.Text,
+                            Table = btnSelected.Content?.ToString()
+                        });
+                    this.dataModel.Data.CurrentlySelectedMenuItems.Clear();
+                    btnSelected.IsChecked = false;
+                    this.txtRequests.Text = string.Empty;
+                }
+                else
+                {
+                    Utilities.ShowMessage(Application.Current.Resources["SelTable"].ToString());
+                }
+            }
+            else
+            {
+                Utilities.ShowMessage(Application.Current.Resources["SelItem"].ToString());
+            }
         }
 
-        private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
+        private void btnAdd_OnClick(object sender, RoutedEventArgs e)
         {
+
             this.lvAvailable.SelectedItems.Cast<string>().ToList().ForEach(i =>
             {
-                this.dataModel.Data.CurrentlySelectedMenuItems.Add(i);
+                if (this.dataModel.Data.CurrentlySelectedMenuItems.Select(s => s.Name).Contains(i.ToString()))
+                {
+                    this.dataModel.Data.CurrentlySelectedMenuItems.First(s => s.Name == i).Number++;
+                }
+                else
+                {
+                    this.dataModel.Data.CurrentlySelectedMenuItems.Add(new OrderItem { Name = i });
+                }
             });
+
             this.lvAvailable.SelectedItems.Clear();
+        }
+
+
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            Utilities.FindVisualChildren<ToggleButton>(this).Where(t => t != sender).ToList().ForEach(t =>
+                {
+                    t.IsChecked = false;
+                });
         }
     }
 }
